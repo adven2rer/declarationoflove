@@ -2,6 +2,8 @@ Fresh::Application.routes.draw do
 
   root 'main#index'
 
+  get '/about' => 'main#about'
+
   post '/' => 'main#index'
 
   get '/:page' => 'main#index'

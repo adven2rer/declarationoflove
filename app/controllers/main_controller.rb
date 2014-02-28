@@ -41,7 +41,6 @@ class MainController < ApplicationController
   	    #	m.destroy
   	    #end
   		#end
-
   		if params[:page] != nil
   			@messages = Message.page(params[:page])
   		end
@@ -50,4 +49,6 @@ class MainController < ApplicationController
 			@messages = Message.last_messages
 		end
 	end	
+	def about
+	end
 end
