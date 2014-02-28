@@ -1,0 +1,137 @@
+<div align="left" style="background:Indigo;padding-top:0.01%"><h1 style="color:white;padding-left:10%; padding-bottom:1.7%" >I Love You </h1></div>
+<div class="row">
+  <div class="col-md-9 col-md-push-3"><h2>Добро пожаловать на сервис анонимных признаний в любви/симпатии в Нюрбе! Дарим друг другу радость и любовь ;)</h2></div>
+  <div class="col-md-3 col-md-pull-9" align="center"><%= image_tag "I_Love_You.jpg"%></div>
+</div>
+<%= form_for :message do |f| %>
+  <% if @new_message != nil and not @new_message.valid? %>
+  <div id="error_explanation">
+    <h2><%= @new_message.errors.count %>
+    <% if @new_message.errors.count == 1 %>
+    ошибка 
+    <% end %>
+    <% if @new_message.errors.count > 1 %>
+    ошибки
+    <% end %>
+    помешали сохранению вашего сообщения:</h2>
+    <% @new_message.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  <% end %>
+    </ul>
+  </div>  
+    </ul>
+  </div>
+<% end %>
+
+<div align="center">
+  <%= form_tag do %>
+     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small>(максимальная длина - 20 символов)</small></h4></strong>
+     <p><%= text_field_tag :name %></p>
+     <h4>Ваше признание в любви/симпатии<small>(максимальная длина - 200 символов)</small></h4>
+     <p><%= text_area_tag :text %></p>
+     <%= button_tag(name: "submit", type: 'submit', class: "btn btn-default") do %>Отправить<% end %>
+<% end %>
+</div>
+
+<div class="row">
+<div class="col-md-4 col-md-push-8">
+<legend>TOP-10 признаний в любви/симпатии</legend>
+<% if Like.top_ten != nil %>
+<% Like.top_ten.each do |like| %>
+<% if like.karma != nil and like.karma > 0 %>
+<% m = Message.find(like.message_id) %>
+    <h3><b><%= m.name %></b>: <%= m.text %></h3>
+    <button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-thumbs-up" style="font-size:1.6em"></span> <%=like.karma%>
+</button>
+<% end %>
+<% end %>
+<% else %>
+<h3>пока ничего нету :(</h3>
+<% end %>
+
+<legend style="padding-top:10%"><strong>СКОРО:</strong></legend>
+<h3><span class="glyphicon glyphicon-hand-right"></span> оптимизация для мобильных дисплеев и мобильная версия(можеть быть)</h3>
+<h3><span class="glyphicon glyphicon-hand-right"></span> поддержка смайлов Emoji</h3>
+<h3><span class="glyphicon glyphicon-hand-right"></span> новые и красивые формы</h3>
+<h3><span class="glyphicon glyphicon-hand-right"></span> интеграция с социальными сетями</h3>
+
+</div>
+
+<div class="col-md-8 col-md-pull-4">
+<div align="center">
+<h5>Перейти на страницу...</h5>
+<%= form_tag do %> 
+<%= text_field_tag :page %>
+<%= button_tag(type: 'submit', class: "btn btn-default") do %>ОК
+<% end %>
+<% end %>
+</div>
+<div align="center"><%= paginate(:short_list) %></div>
+
+<div align="center">
+  <% @messages.each do |message| %>
+
+   <%= image_tag "anonim.png", {height: 60, width: 60} %>
+
+  <b><%= message.name %></b>:
+  
+  <%= message.text %>
+
+  <p></p>
+
+<h6 style="color:grey"><%= time_ago_in_words(message.created_at) %> назад</h6>
+
+  <%= form_tag do %>
+
+       <%= hidden_field_tag :message_id, message.id %>
+
+       <%= button_tag(name: "like_btn", type: "submit") do %>
+              <i class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:MediumBlue"></i> 
+       <% end %>
+
+       <%= button_tag(name: "dislike_btn", type: "submit") do %>
+              <i class="glyphicon glyphicon-thumbs-down" style="font-size:1.5em;color:Crimson"></i>
+       <% end %>
+
+  <% end %>
+  
+      <% if message.like != nil and message.like.karma != nil %>   
+        <% l = message.like.karma %> 
+            
+              <% if l < 0 %>
+                   <h2 style="color:red">
+                   <%= l %>
+                   </h2>
+              <% elsif l == 0 %>  
+                   <h2 style="color:grey">
+                   <%= l %>
+                   </h2>
+              <% elsif l > 0 %>
+                   <h2 style="color:green">
+                   <%= l %> 
+                   </h2>
+              <% end %>
+        <% end %> 
+        <% if message.like == nil %>
+        <h2> 0 </h2>
+        <% end %>
+<% end %>
+</div>
+
+<div align="center"><%= paginate(:short_list) %></div>
+
+</div>
+<div class="container" align="center">
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>" align="center"><%= value %></div>
+      <% end %>
+</div>
+
+<div class="container">
+          <%= yield %>
+          <%= debug(params) if Rails.env.development? %>
+      </div>
+</div>
+</div>
