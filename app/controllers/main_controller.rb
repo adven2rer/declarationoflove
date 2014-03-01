@@ -49,6 +49,7 @@ class MainController < ApplicationController
 			@messages = Message.last_messages
 		end
 	end	
+	
 	def about
 	end
 end

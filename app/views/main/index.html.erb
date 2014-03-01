@@ -5,10 +5,44 @@
   <p><h3>Добро пожаловать на сервис анонимных признаний в любви/симпатии в Нюрбе! Дарим друг другу радость и любовь ;)</h3></p>
   <p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
 </div>
+<style>
+    .myDiv .b-share-icon_vkontakte{
+        background: url("/img/vk.jpg") no-repeat 0 0;
+        width: 32px;
+        height: 32px;
+    }
+    .myDiv .b-share-icon_facebook{
+        background: url("/img/fb.jpg") no-repeat 0 0;
+        width: 32px;
+        height: 32px;
+    }
+    .myDiv .b-share-icon_twitter{
+        background: url("/img/tw.jpg") no-repeat 0 0;
+        width: 32px;
+        height: 32px;
+    }
+    .myDiv .b-share-icon_odnoklassniki{
+        background: url("/img/od.jpg") no-repeat 0 0;
+        width: 32px;
+        height: 32px;
+    }    
+    .myDiv .b-share-icon{
+        margin-left: 10px;
+    }
+</style>
+<script type="text/javascript" src="//yandex.st/share/share.js"charset="utf-8"></script>
+<div class="myDiv">
+    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki"></div> 
+</div>
+
+<script type="text/javascript" src="//yandex.st/share/share.js"
+charset="utf-8"></script>
+<div class="yashare-auto-init" data-yashareL10n="ru"
+ data-yashareQuickServices="vkontakte,facebook,twitter" data-yashareTheme="counter"></div> 
   </div> 
   <div class="col-md-3 col-md-pull-9" align="right"><%= image_tag "I_Love_You.jpg"%></div>
 </div>
-
+<p></p>
 <div align="center">
 <%= form_for :message do |f| %>
   <% if @new_message != nil and not @new_message.valid? %>
@@ -30,11 +64,11 @@
     </ul>
   </div>
 <% end %>
-<div align="center" class="wall">
+<div class="well" align="center">
   <%= form_tag do %>
-     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small>(максимальная длина - 20 символов)</small></h4></strong>
+     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small> (максимальная длина - 20 символов)</small></h4></strong>
      <p><%= text_field_tag :name %></p>
-     <h4>Ваше признание в любви/симпатии<small>(максимальная длина - 200 символов)</small></h4>
+     <h4>Ваше признание в любви/симпатии<small> (максимальная длина - 200 символов)</small></h4>
      <p><%= text_area_tag :text %></p>
      <%= button_tag(name: "submit", type: 'submit', class: "btn btn-default") do %>Отправить<% end %>
 <% end %>
@@ -62,11 +96,11 @@
 <h3><span class="glyphicon glyphicon-hand-right"></span> поддержка смайлов Emoji</h3>
 <h3><span class="glyphicon glyphicon-hand-right"></span> новые и красивые формы</h3>
 <h3><span class="glyphicon glyphicon-hand-right"></span> интеграция с социальными сетями</h3>
-
 </div>
 
 <div class="col-md-8 col-md-pull-4">
 <div align="center">
+
 <% if Message.pgcount > 6 %>
 <h5>Перейти на страницу...</h5>
 <%= form_tag do %> 
@@ -76,8 +110,9 @@
 <% end %>
 <% end %>
 </div>
+<% if Message.pgcount > 1 %>
 <div align="center"><%= paginate(:short_list) %></div>
-
+<% end %>
 
 <div align="center">
 <% if Message.all.empty? %>
@@ -131,10 +166,12 @@
         <h2> 0 </h2>
         <% end %>
 <% end %>
+
+<% if Message.pgcount > 1 %>
 </div>
 <div align="center"><%= paginate(:short_list) %></div>
-
 </div>
+<% end %>
 <div class="container" align="center">
       <% flash.each do |key, value| %>
           <div class="alert alert-<%= key %>" align="center"><%= value %></div>
