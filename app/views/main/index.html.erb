@@ -1,14 +1,14 @@
-<div class="row">
-  <div class="col-md-9 col-md-push-3" align="center">
   <div class="jumbotron" align = "center">
   <p><h1>Приветствуем вас на борту!</h1></p>
   <p><h3>Добро пожаловать на сервис анонимных признаний в любви/симпатии в Нюрбе! Дарим друг другу радость и любовь ;)</h3></p>
   <p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
 </div>
-  </div> 
-  <div class="col-md-3 col-md-pull-9" align="right"><%= image_tag "I_Love_You.jpg"%></div>
-</div>
-
+<div class="row"><div class="col-md-6 col-md-offset-3" align="center"><h3>Рассказать друзьям:</h3>
+<script type="text/javascript" src="//yandex.st/share/share.js"
+charset="utf-8"></script>
+<legend><div class="yashare-auto-init" data-yashareL10n="ru"
+ data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></legend>
+ </div></div></div></div>
 <div align="center">
 <%= form_for :message do |f| %>
   <% if @new_message != nil and not @new_message.valid? %>
@@ -57,11 +57,11 @@
 <% end %>
 <% end %>
 
-<legend style="padding-top:10%"><strong>СКОРО:</strong></legend>
+<!--<legend style="padding-top:10%"><strong>СКОРО:</strong></legend>
 <h3><span class="glyphicon glyphicon-hand-right"></span> улучшенная оптимизация для мобильных дисплеев</h3>
 <h3><span class="glyphicon glyphicon-hand-right"></span> поддержка смайлов Emoji</h3>
 <h3><span class="glyphicon glyphicon-hand-right"></span> новые и красивые формы</h3>
-<h3><span class="glyphicon glyphicon-hand-right"></span> интеграция с социальными сетями</h3>
+<h3><span class="glyphicon glyphicon-hand-right"></span> интеграция с социальными сетями</h3>-->
 
 </div>
 
@@ -76,7 +76,9 @@
 <% end %>
 <% end %>
 </div>
+<% if Message.pgcount > 1 %>
 <div align="center"><%= paginate(:short_list) %></div>
+<% end %>
 
 
 <div align="center">
@@ -132,7 +134,9 @@
         <% end %>
 <% end %>
 </div>
+<% if Message.pgcount > 1 %>
 <div align="center"><%= paginate(:short_list) %></div>
+<% end %>
 
 </div>
 <div class="container" align="center">
