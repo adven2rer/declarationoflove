@@ -1,6 +1,6 @@
 <div class="jumbotron" align = "center">
 		<p><h1>Приветствуем вас на борту!</h1></p>
-		<p><h3>Добро пожаловать на онлайн сервис анонимных признаний в Нюрбе!</h3></p>
+		<p><h3>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h3></p>
 		<p><h4>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с LoveMessage!</h4></p>
 		<p><a href="http://lovenotesnyurba.herokuapp.com/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
 </div>
@@ -171,6 +171,27 @@
 						<%= yield %>
 						<%= debug(params) if Rails.env.development? %>
 					</div>
-
 			</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3"> 
+		<div align="center">
+		<div class="separator">&nbsp;</div>		
+			<% if @visits_not_unique == 1%>
+				<b><i><%= @visits_not_unique %></i></b> посещение за всё время
+			<% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
+				<b><i><%= @visits_not_unique %></i></b> посещения за всё время
+			<% elsif @visits_not_unique >= 5 and @visits_not_unique %>
+				<b><i><%= @visits_not_unique %></i></b> посещений за всё время
+			<% end %>
+
+			<% if @visits_unique == 1 %>
+				<p><b><i><%= @visits_unique %></i></b> уникальное посещение за всё время</p>
+			<% elsif @visits_unique > 1 and @visits_unique < 5 %>
+				<p><b><i><%= @visits_unique %></i></b> уникальных посещения за всё время</p>
+			<% elsif @visits_unique >= 5 and @visits_unique %>
+				<p><b><i><%= @visits_unique %></i></b> уникальных посещений за всё время</p>
+			<% end %>
+		</div>
+	</div>
 </div>
