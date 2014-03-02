@@ -43,7 +43,10 @@ gem 'simple_form'
 
 gem 'unicorn'
 
-gem 'emoji'
+
+#gem 'emoji'
+#gem 'gemoji'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
