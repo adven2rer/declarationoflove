@@ -1,9 +1,7 @@
 class MainController < ApplicationController
 	def index
 		if params["submit"] != nil
-			@new_message = Message.new
-			@new_message.name = params[:name]
-			@new_message.text = params[:text]
+			@new_message = Message.new(params[:message].permit(:name, :text))
 			@new_message.save
 
 			new_like_object = Like.new
