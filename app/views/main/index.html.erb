@@ -1,174 +1,173 @@
-  <div class="jumbotron" align = "center">
-  <p><h1>Приветствуем вас на борту!</h1></p>
-  <p><h3>Добро пожаловать на сервис анонимных признаний в любви/симпатии в Нюрбе! Дарим друг другу радость и любовь ;)</h3></p>
-  <p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
+<div class="jumbotron" align = "center">
+		<p><h1>Приветствуем вас на борту!</h1></p>
+		<p><h3>Добро пожаловать на сервис анонимных признаний в любви/симпатии в Нюрбе! Дарим друг другу радость и любовь ;)</h3></p>
+		<p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
 </div>
-<style>
-    .myDiv .b-share-icon_vkontakte{
-        background: url("/img/vk.jpg") no-repeat 0 0;
-        width: 32px;
-        height: 32px;
-    }
-    .myDiv .b-share-icon_facebook{
-        background: url("/img/fb.jpg") no-repeat 0 0;
-        width: 32px;
-        height: 32px;
-    }
-    .myDiv .b-share-icon_twitter{
-        background: url("/img/tw.jpg") no-repeat 0 0;
-        width: 32px;
-        height: 32px;
-    }
-    .myDiv .b-share-icon_odnoklassniki{
-        background: url("/img/od.jpg") no-repeat 0 0;
-        width: 32px;
-        height: 32px;
-    }    
-    .myDiv .b-share-icon{
-        margin-left: 10px;
-    }
- </style>
-<div class="row"><div class="col-md-6 col-md-offset-3" align="center"><h3>Рассказать друзьям:</h3>
-<script type="text/javascript" src="//yandex.st/share/share.js"
-charset="utf-8"></script>
-<legend><div class="yashare-auto-init" data-yashareL10n="ru"
- data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></legend>
- </div></div></div></div>
+<div class="row">
+		<div class="col-md-6 col-md-offset-3" align="center">
+			<h4>РАССКАЗАТЬ ДРУЗЬЯМ:</h4>
+			<script type="text/javascript" src="//yandex.st/share/share.js"
+				charset="utf-8">
+			</script>
+			<div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter">
+	    	</div>
+	    	<hr></hr>
+	    </div>
 </div>
+
 <p></p>
+
 <div align="center">
-<%= form_for :message do |f| %>
-  <% if @new_message != nil and not @new_message.valid? %>
-  <div id="error_explanation">
-    <h2><%= @new_message.errors.count %>
-    <% if @new_message.errors.count == 1 %>
-    ошибка 
-    <% end %>
-    <% if @new_message.errors.count > 1 %>
-    ошибки
-    <% end %>
-    помешали сохранению вашего сообщения:</h2>
-    <% @new_message.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  <% end %>
-    </ul>
-  </div>  
-    </ul>
-  </div>
-<% end %>
-<div class="well" align="center">
-  <%= form_tag do %>
-     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small> (максимальная длина - 20 символов)</small></h4></strong>
-     <p><%= text_field_tag :name %></p>
-     <h4>Ваше признание в любви/симпатии<small> (максимальная длина - 200 символов)</small></h4>
-     <p><%= text_area_tag :text %></p>
-     <%= button_tag(name: "submit", type: 'submit', class: "btn btn-default") do %>Отправить<% end %>
-<% end %>
+	<%= form_for :message do |f| %>
+			<% if @new_message != nil and not @new_message.valid? %>
+				<div id="error_explanation">
+				
+					<h2><%= @new_message.errors.count %>
+					
+						<% if @new_message.errors.count == 1 %>
+							ошибка 
+						<% end %>
+
+						<% if @new_message.errors.count > 1 %>
+							ошибки
+						<% end %>
+
+							помешали сохранению вашего сообщения:
+
+					</h2>
+
+					<% @new_message.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</div> 
+			<% end %> 
+	<% end %>
 </div>
+
+
+<div class="well" align="center">
+     <%= form_tag do %>
+		     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small> (максимальная длина - 20 символов)</small></h4></strong>
+		     <p><%= text_field_tag :name %></p>
+		     <h4>Ваше признание в любви/симпатии<small> (максимальная длина - 200 символов)</small></h4>
+		     <p><%= text_area_tag :text %></p>
+		     <%= button_tag(name: "submit", type: 'submit', class: "btn btn-default") do %>
+		 	    Отправить 
+		     <% end %>
+	 <% end %>
 </div>
 
 <div class="row">
-<div class="col-md-4 col-md-push-8">
-<legend>TOP-10 признаний</legend>
-<% if Message.all.empty? %>
-<h4>Пока ничего нет :(</h4>
-<% else %>
-<% Like.top_ten.each do |like| %>
-<% if like.karma != nil and like.karma > 0 %>
-<% m = Message.find(like.message_id) %>
-    <h3><b><%= m.name %></b>: <%= m.text %></h3>
-    <button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:RoyalBlue"><%=like.karma%></span></button>
-<% end %>
-<% end %>
-<% end %>
 
-<div class="col-md-8 col-md-pull-4">
-<div align="center">
+			<div class="col-md-4 col-md-push-8" align="right">
+				<div align="center">
+					<legend>TOP-10 признаний</legend>
+					<% if Message.all.empty? %>
+						<h4>Пока ничего нет :(</h4>
+					<% else %>
+						<% Like.top_ten.each do |like| %>
+							<% if like.karma != nil and like.karma > 0 %>
+								<% m = Message.find(like.message_id) %>
+								<h3><b><%= m.name %></b>: <%= m.text %></h3>
+									<span class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:RoyalBlue">
+									</span>
+									<%=like.karma%>
+							<% end %>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
 
-<% if Message.pgcount > 6 %>
-<h5>Перейти на страницу...</h5>
-<%= form_tag do %> 
-<%= text_field_tag :page %>
-<%= button_tag(type: 'submit', class: "btn btn-default") do %>ОК
-<% end %>
-<% end %>
-<% end %>
-</div>
-<% if Message.pgcount > 1 %>
-<div align="center"><%= paginate(:short_list) %></div>
-<% end %>
+			<div class="col-md-8 col-md-pull-4">
 
-<div align="center">
-<% if Message.all.empty? %>
-<h2>Пока ничего нет :(</h2>
-<% end %>
+					<div align="center">
+							<% if Message.pgcount > 6 %>
+								<h5>Перейти на страницу...</h5>
+								<%= form_tag do %> 
+									<%= text_field_tag :page %>
+									<%= button_tag(type: 'submit', class: "btn btn-default") do %>
+										ОК
+									<% end %>
+								<% end %>
+							<% end %>
+					</div>
 
-  <% @messages.each do |message| %>
 
-   <%= image_tag "anonim.png", {height: 60, width: 60} %>
+					<% if Message.pgcount > 1 %>
+						<div align="center">
+							<%= paginate(:short_list) %>
+					    </div>
+					<% end %>
 
-  <b><%= message.name %></b>:
-  
-  <%= message.text %>
+					<div align="center">
+						<% if Message.all.empty? %>
+							<h2>Пока ничего нет :(</h2>
+						<% end %>
 
-  <p></p>
+						<% @messages.each do |message| %>
 
-<h6 style="color:grey"><%= time_ago_in_words(message.created_at) %> назад</h6>
+							<%= image_tag "anonim.png", {height: 60, width: 60} %>
 
-  <%= form_tag do %>
+							<b><%= message.name %></b>:
 
-       <%= hidden_field_tag :message_id, message.id %>
+							<%= message.text %>
 
-       <%= button_tag(name: "like_btn", type: "submit") do %>
-              <i class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:MediumBlue"></i> 
-       <% end %>
+							<p></p>
 
-       <%= button_tag(name: "dislike_btn", type: "submit") do %>
-              <i class="glyphicon glyphicon-thumbs-down" style="font-size:1.5em;color:Crimson"></i>
-       <% end %>
+							<h6 style="color:grey"><%= time_ago_in_words(message.created_at) %> ago</h6>
 
-  <% end %>
-  
-      <% if message.like != nil and message.like.karma != nil %>   
-        <% l = message.like.karma %> 
-            
-              <% if l < 0 %>
-                   <h2 style="color:red">
-                   <%= l %>
-                   </h2>
-              <% elsif l == 0 %>  
-                   <h2 style="color:grey">
-                   <%= l %>
-                   </h2>
-              <% elsif l > 0 %>
-                   <h2 style="color:green">
-                   <%= l %> 
-                   </h2>
-              <% end %>
-        <% end %> 
-        <% if message.like == nil %>
-        <h2> 0 </h2>
-        <% end %>
-<% end %>
+							<%= form_tag do %>
 
-<% if Message.pgcount > 1 %>
-</div>
-<% if Message.pgcount > 1 %>
-<div align="center"><%= paginate(:short_list) %></div>
-<% end %>
-</div>
-<% end %>
-<div class="container" align="center">
-      <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>" align="center"><%= value %></div>
-      <% end %>
-</div>
+									<%= hidden_field_tag :message_id, message.id %>
 
-<div class="container">
-          <%= yield %>
-          <%= debug(params) if Rails.env.development? %>
-      </div>
-</div>
+									<%= button_tag(name: "like_btn", type: "submit") do %>
+										<i class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:MediumBlue"></i> 
+									<% end %>
+
+									<%= button_tag(name: "dislike_btn", type: "submit") do %>
+										<i class="glyphicon glyphicon-thumbs-down" style="font-size:1.5em;color:Crimson"></i>
+									<% end %>
+
+							<% end %>
+
+							<% if message.like != nil and message.like.karma != nil %>   
+									<% l = message.like.karma %> 
+
+									<% if l < 0 %>
+										<h2 style="color:red">
+										<%= l %>
+										</h2>
+									<% elsif l == 0 %>  
+										<h2 style="color:grey">
+										<%= l %>
+										</h2>
+									<% elsif l > 0 %>
+										<h2 style="color:green">
+										<%= l %> 
+										</h2>
+									<% end %> 
+							<% end %>
+
+							<% if message.like == nil %>
+								<h2 style="color:grey"> 0 </h2>
+							<% end %>
+
+						<% end %>
+						<% if Message.pgcount > 1 %>
+							<div align="center"><%= paginate(:short_list) %></div>
+						<% end %>
+					</div>
+
+					<div class="container" align="center">
+						<% flash.each do |key, value| %>
+							<div class="alert alert-<%= key %>" align="center"><%= value %></div>
+						<% end %>
+					</div>
+
+					<div class="container">
+						<%= yield %>
+						<%= debug(params) if Rails.env.development? %>
+					</div>
+
+			</div>
 </div>

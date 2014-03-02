@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226095029) do
+ActiveRecord::Schema.define(version: 20140302081748) do
 
   create_table "likes", force: true do |t|
     t.integer  "karma"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20140226095029) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "visits", force: true do |t|
+    t.integer  "all_not_unique_visits"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "all_unique_visits"
   end
 
 end

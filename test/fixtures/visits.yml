@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  all_not_unique_visits: 1
+
+two:
+  all_not_unique_visits: 1
