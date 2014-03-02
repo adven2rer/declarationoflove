@@ -43,6 +43,9 @@ gem 'simple_form'
 
 gem 'unicorn'
 
+gem 'gemoji', github: 'github/gemoji'
+
+gem 'html-pipeline'
 
 #gem 'emoji'
 #gem 'gemoji'

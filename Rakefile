@@ -4,3 +4,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 Fresh::Application.load_tasks
+
+load 'tasks/emoji.rake'
