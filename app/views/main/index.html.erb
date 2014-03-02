@@ -1,8 +1,8 @@
 <div class="jumbotron" align = "center">
 		<p><h1>Приветствуем вас на борту!</h1></p>
-		<p><h3>Добро пожаловать на онлайн сервис анонимных признаний в Нюрбе!</h3></p>
+		<p><h3>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h3></p>
 		<p><h4>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с LoveMessage!</h4></p>
-		<p><a href="http://lovenotesnyurba.herokuapp.com/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
+		<p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
 </div>
 <div class="row">
 		<div class="col-md-6 col-md-offset-3" align="center">
@@ -45,18 +45,30 @@
 	<% end %>
 </div>
 
-
-<div class="well" align="center">
-     <%= form_tag do %>
-		     <strong><h4>Ваше имя/псевдоним/выдуманное имя<small> (максимальная длина - 20 символов)</small></h4></strong>
-		     <p><%= text_field_tag :name %></p>
-		     <h4>Ваше признание в любви/симпатии<small> (максимальная длина - 200 символов)</small></h4>
-		     <p><%= text_area_tag :text %></p>
-		     <%= button_tag(name: "submit", type: 'submit', class: "btn btn-default") do %>
-		 	    Отправить 
-		     <% end %>
-	 <% end %>
+<div class="row">
+		<div class="col-md-6 col-md-offset-3" align="center">
+			<div class="row-fluid">
+				<div class="span4 well">
+					<%= form_for :message, :html => {:class => "form-horizontal"} do |m| %>
+						<fieldset>
+						<div class="control-group">
+							<strong><h4>Ваше имя/псевдоним/выдуманное имя<small> (максимальная длина - 20 символов)</small></h4></strong>
+							<%= m.text_field :name, :class => "form-control" %>
+							<div class="controls">
+							<h4>Ваше признание в любви/симпатии<small> (максимальная длина - 200 символов)</small></h4>
+								<%= m.text_area :text, :class => "form-control", :rows => "3" %>
+							</div>
+						</div>
+						<p></p>
+						<div class="form-actions">
+							<%= m.submit :class => "btn btn-primary" %>
+						</div>
+						</fieldset>
+					<% end %>
+				</div>
+		</div>
 </div>
+
 
 <div class="row">
 
@@ -171,6 +183,27 @@
 						<%= yield %>
 						<%= debug(params) if Rails.env.development? %>
 					</div>
-
 			</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3"> 
+		<div align="center">
+		<div class="separator">&nbsp;</div>		
+			<% if @visits_not_unique == 1%>
+				<b><i><%= @visits_not_unique %></i></b> посещение за всё время
+			<% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
+				<b><i><%= @visits_not_unique %></i></b> посещения за всё время
+			<% elsif @visits_not_unique >= 5 and @visits_not_unique %>
+				<b><i><%= @visits_not_unique %></i></b> посещений за всё время
+			<% end %>
+
+			<% if @visits_unique == 1 %>
+				<p><b><i><%= @visits_unique %></i></b> уникальное посещение за всё время</p>
+			<% elsif @visits_unique > 1 and @visits_unique < 5 %>
+				<p><b><i><%= @visits_unique %></i></b> уникальных посещения за всё время</p>
+			<% elsif @visits_unique >= 5 and @visits_unique %>
+				<p><b><i><%= @visits_unique %></i></b> уникальных посещений за всё время</p>
+			<% end %>
+		</div>
+	</div>
 </div>
