@@ -52,7 +52,7 @@ class MainController < ApplicationController
 		if Visits.all.empty?
 			v = Visits.new
 			v.all_not_unique_visits = 0
-			v.unique_visits = 0
+			v.all_unique_visits = 0
 			v.save
 		end 
 
