@@ -52,23 +52,24 @@ class MainController < ApplicationController
 		if Visits.all.empty?
 			v = Visits.new
 			v.all_not_unique_visits = 0
+			v.unique_visits = 0
 			v.save
 		end 
 
-		v = Visits.find(1)
+		v = Visits.all[0]
 		
 		v.all_not_unique_visits = v.all_not_unique_visits + 1
 		v.save
 
-		@visits_not_unique = Visits.find(1).all_not_unique_visits
+		@visits_not_unique = Visits.all[0].all_not_unique_visits
 
-		if cookies[:visited] = nil
+		if cookies[:visited] == nil
 			cookies[:visited] = "true"
-			v.all_unque_visits = v.all_unque_visits + 1
+			v.all_unique_visits = v.all_unique_visits + 1
 			v.save
 		end	
 
-		@visits_unique = Visits.find(1).all_unique_visits
+		@visits_unique = Visits.all[0].all_unique_visits
 	end	
 
 	def about
