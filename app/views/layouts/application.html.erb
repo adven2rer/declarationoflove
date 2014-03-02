@@ -20,28 +20,6 @@
 	</h1>
 </div>
 <%= yield %>
-<div class="row">
-	<div class="col-md-6 col-md-offset-3"> 
-		<div align="center">
-		<div class="separator">&nbsp;</div>		
-			<% if @visits_not_unique == 1%>
-				<b><i><%= @visits_not_unique %></i></b> посещение за всё время
-			<% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
-				<b><i><%= @visits_not_unique %></i></b> посещения за всё время
-			<% elsif @visits_not_unique >= 5 and @visits_not_unique %>
-				<b><i><%= @visits_not_unique %></i></b> посещений за всё время
-			<% end %>
-
-			<% if @visits_unique == 1%>
-				<p><b><i><%= @visits_unique %></i></b> уникальное посещение за всё время</p>
-			<% elsif @visits_unique > 1 and @visits_unique < 5 %>
-				<p><b><i><%= @visits_unique %></i></b> уникальных посещения за всё время</p>
-			<% elsif @visits_unique >= 5 and @visits_unique %>
-				<p><b><i><%= @visits_unique %></i></b> уникальных посещений за всё время</p>
-			<% end %>
-		</div>
-	</div>
-</div>
 </body>
 </html>
 
