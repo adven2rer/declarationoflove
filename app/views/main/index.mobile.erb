@@ -1,6 +1,30 @@
+			<div class="jumbotron" align="center">
+					<p><h2>Приветствуем вас на борту!</h2></p>
+					<p><h3>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h3></p>
+					<p><h4>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с Declaration of Love!</h4></p>
+					<p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
+					<span class="glyphicon glyphicon-hand-up" style="font-size:2em"></span> 
+					<p><h4><b>ВЫ</b> управляете контентом...</h4></p> 
+			</div>
+			<div align="center">
+				<% form_tag %>
+				<legend><h2>ТОП-10 признаний</h2></legend>
+				<% if Message.all.empty? %>
+					<h4>Пока ничего нет :(</h4>
+				<% else %>
+					<% Like.top_ten.each do |like| %>
+						<% if like.karma != nil and like.karma > 0 %>
+							<% m = Message.find(like.message_id) %>
+							<h3><b><%= m.name %></b>: <%= m.text %></h3>
+									<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
+									</span>
+									<x style="color:RoyalBlue"><%= like.karma %></x>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
 <div class="container">
 	<div class="row">
-	 
 		<div align="center">
 			<%= form_for :message do |f| %>
 					<% if @new_message != nil and not @new_message.valid? %>
@@ -28,7 +52,6 @@
 			<% end %>
 		</div>
 	
-			<div class="col-xs-6 col-xs-offset-1 col-sm-6 col-sm-offset-1">
 				<div class="row-fluid" align="center">
 					<div class="span4 well">
 						<%= form_for :message, :html => {:class => "form-horizontal"} do |m| %>
@@ -139,35 +162,6 @@
 					<%= debug(params) if Rails.env.development? %>
 				</div>
 			</div>
-		<div class="col-xs-4 col-xs-push-1 col-sm-4 col-sm-push-1">
-			<div class="jumbotron" align="center">
-					<p><h2>Приветствуем вас на борту!</h2></p>
-					<p><h3>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h3></p>
-					<p><h4>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с Declaration of Love!</h4></p>
-					<p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
-					<span class="glyphicon glyphicon-hand-up" style="font-size:2em"></span> 
-					<p><h4><b>ВЫ</b> управляете контентом...</h4></p> 
-			</div>
-			<div align="center">
-				<% form_tag %>
-				<%= image_tag "top10.jpg" %>
-				<legend><h2>признаний</h2></legend>
-				<% if Message.all.empty? %>
-					<h4>Пока ничего нет :(</h4>
-				<% else %>
-					<% Like.top_ten.each do |like| %>
-						<% if like.karma != nil and like.karma > 0 %>
-							<% m = Message.find(like.message_id) %>
-							<h3><b><%= m.name %></b>: <%= m.text %></h3>
-									<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-									</span>
-									<x style="color:RoyalBlue"><%= like.karma %></x>
-						<% end %>
-					<% end %>
-				<% end %>
-			</div>
-
-		</div>
 	</div>
 </div>
 
