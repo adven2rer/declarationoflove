@@ -43,7 +43,7 @@
               </div>
               <p></p>
               <div class="form-actions">
-                <%= m.submit :class => "btn btn-sm primary", :value => "Отправить", :name => "submit" %>
+                <%= m.submit :class => "btn btn-primary", :value => "Отправить", :name => "submit" %>
               </div>
               </fieldset>
             <% end %>
@@ -182,8 +182,6 @@
   <hr></hr>
 </div>
 
-    <div align="center">
-    <div class="separator">&nbsp;</div>   
       <% if @visits_not_unique == 1%>
         <b><i><%= @visits_not_unique %></i></b> посещение за всё время
       <% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
