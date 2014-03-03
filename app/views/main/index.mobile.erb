@@ -1,28 +1,15 @@
 			<div class="jumbotron" align="center">
-					<p><h2>Приветствуем вас на борту!</h2></p>
-					<p><h3>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h3></p>
-					<p><h4>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с Declaration of Love!</h4></p>
-					<p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
-					<span class="glyphicon glyphicon-hand-up" style="font-size:2em"></span> 
-					<p><h4><b>ВЫ</b> управляете контентом...</h4></p> 
+
 			</div>
-			<div align="center">
-				<% form_tag %>
-				<legend><h2>ТОП-10 признаний</h2></legend>
-				<% if Message.all.empty? %>
-					<h4>Пока ничего нет :(</h4>
-				<% else %>
-					<% Like.top_ten.each do |like| %>
-						<% if like.karma != nil and like.karma > 0 %>
-							<% m = Message.find(like.message_id) %>
-							<h3><b><%= m.name %></b>: <%= m.text %></h3>
-									<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-									</span>
-									<x style="color:RoyalBlue"><%= like.karma %></x>
-						<% end %>
-					<% end %>
-				<% end %>
-			</div>
+
+      <div class="jumbotron" align="center">
+            <p><h2>Добро пожаловать на онлайн-сервис анонимных признаний в Нюрбе!</h2></p>
+            <p><h3>В этом месте вы можете дать выход чувствам, мыслям и эмоциям. Не держи в себе - поделись с Declaration of Love!</h3></p>
+            <p><a href="/about" class="btn btn-primary btn-lg" role="button">Подробнее</a></p>
+            <span class="glyphicon glyphicon-hand-up" style="font-size:2em"></span> 
+            <p><h4><b>ВЫ</b> управляете контентом...</h4></p> 
+      </div>
+
 <div class="container">
 	<div class="row">
 		<div align="center">
@@ -51,7 +38,6 @@
 					<% end %> 
 			<% end %>
 		</div>
-	
 				<div class="row-fluid" align="center">
 					<div class="span4 well">
 						<%= form_for :message, :html => {:class => "form-horizontal"} do |m| %>
@@ -66,14 +52,50 @@
 							</div>
 							<p></p>
 							<div class="form-actions">
-								<%= m.submit :class => "btn btn-primary", :value => "Отправить", :name => "submit" %>
+								<%= m.submit :class => "btn btn-default", :value => "Отправить", :name => "submit" %>
 							</div>
 							</fieldset>
 						<% end %>
 					</div>
 				</div>
 
+				<!-- Button trigger modal -->
 				<div align="center">
+					<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+				 	 ТОП-10 признаний
+					</button>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" style="padding-top:10%">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				        <h4 class="modal-title" id="myModalLabel">ТОП-10 признаний</h4>
+				      </div>
+				      <div class="modal-body" align="center">
+				        		<% if Message.all.empty? %>
+									<h4>Пока ничего нет :(</h4>
+									<% else %>
+										<% Like.top_ten.each do |like| %>
+											<% if like.karma != nil and like.karma > 0 %>
+												<% m = Message.find(like.message_id) %>
+												<h3><b><%= m.name %></b>: <%= m.text %></h3>
+														<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
+														</span>
+														<x style="color:RoyalBlue"><%= like.karma %></x>
+											<% end %>
+										<% end %>
+								<% end %>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div align="center" style="padding-top:4%">
 						<% if Message.pgcount > 6 %>
 							<h5>Перейти на страницу...</h5>
 							<%= form_tag do %> 
