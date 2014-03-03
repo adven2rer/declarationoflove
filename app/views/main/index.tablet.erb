@@ -181,7 +181,7 @@
   </div>
   <hr></hr>
 </div>
-
+    <div align="center">
       <% if @visits_not_unique == 1%>
         <b><i><%= @visits_not_unique %></i></b> посещение за всё время
       <% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
@@ -198,4 +198,3 @@
         <p><b><i><%= @visits_unique %></i></b> уникальных посещений за всё время</p>
       <% end %>
     </div>
-  </div>
