@@ -47,6 +47,8 @@ gem 'gemoji', github: 'github/gemoji'
 
 gem 'html-pipeline'
 
+gem 'mobile-fu'
+
 #gem 'emoji'
 #gem 'gemoji'
 
