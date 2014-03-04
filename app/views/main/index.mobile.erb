@@ -1,6 +1,20 @@
 <div class="container">
 	<div class="row">
 		<div align="center">
+		      <% if @saved == false %> 
+		          <div class="panel panel-danger" style="margin-top:2%">
+		              <div class="panel-heading">
+		                  <div class="panel-title">
+		                    Ошибка!
+		                  </div>
+		              </div>
+	                  <div class="panel-body">
+	                      Вы не можете публиковать сообщения чаще, чем 1 раз в минуту.
+	                  </div>
+		              </div>
+		          </div>
+		      <% end %>
+
 			<%= form_for :message do |f| %>
 					<% if @new_message != nil and not @new_message.valid? %>
 						<div id="error_explanation">
@@ -85,10 +99,6 @@
 					  </div>
 					</div>
 				    <% end %>
-
-					<% if Message.pgcount > 1 %>
-						<div align="center"><%= paginate(:short_list) %></div>
-					<% end %>
 				</div>
 
 				<div class="container" align="center">
@@ -170,12 +180,11 @@
 						<% end %>
 				</div>
 
-
+				<div align="center">
 				<% if Message.pgcount > 1 %>
-					<div align="center">
-						<%= paginate(:short_list) %>
-				    </div>
+					<%= paginate(:short_list) %>
 				<% end %>
+				</div>
 		</div>
 </div>
 

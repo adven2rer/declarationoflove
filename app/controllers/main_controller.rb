@@ -2,17 +2,20 @@ class MainController < ApplicationController
 	has_mobile_fu 
 	def index
 		if params["submit"] != nil and cookies[:posted] == nil
-			@new_message = Message.new(params[:message].permit(:name, :text))
-			@new_message.save
+				@new_message = Message.new(params[:message].permit(:name, :text))
+				@new_message.save
 
-			new_like_object = Like.new
-			new_like_object.karma = 0
-			new_like_object.message_id = @new_message.id
-			new_like_object.save
+				new_like_object = Like.new
+				new_like_object.karma = 0
+				new_like_object.message_id = @new_message.id
+				new_like_object.save
 
 			if @new_message.save
-			cookies[:posted] = { :value => "true", :expires => 1.minute.from_now }
+				cookies[:posted] = { :value => "true", :expires => 1.minute.from_now }	
+				@saved = true
 			end
+		else
+			@saved == false
 	    end
 
 	    if params["like_btn"] != nil or params["dislike_btn"] != nil 
@@ -44,18 +47,14 @@ class MainController < ApplicationController
 			end
 	   	end
 
-	    #if params[:page_find] != nil
-	    #	page_find_params = params[:page_find].to_i
-	    #	redirect_to ('Find page', '/#{page_find_params}')
-	    #end
-
 	   	#message = Message.all
   	    #message.each do |m|
   	    #if Time.now.hour > m.created_at.hour + 5.hour 
   	    #	m.destroy
   	    #end
   		#end
-  		if params[:page] != nil
+
+		if params[:page] != nil
   			@messages = Message.page(params[:page])
   		end
 
