@@ -1,8 +1,7 @@
 class MainController < ApplicationController
 	has_mobile_fu 
-    before_filter :force_mobile_format
 	def index
-		if params["submit"] != nil
+		if params["submit"] != nil and cookies[:posted] == nil
 			@new_message = Message.new(params[:message].permit(:name, :text))
 			@new_message.save
 
@@ -10,6 +9,10 @@ class MainController < ApplicationController
 			new_like_object.karma = 0
 			new_like_object.message_id = @new_message.id
 			new_like_object.save
+
+			if @new_message.save
+			cookies[:posted] = { :value => "true", :expires => 1.minute.from_now }
+			end
 	    end
 
 	    if params["like_btn"] != nil or params["dislike_btn"] != nil 
