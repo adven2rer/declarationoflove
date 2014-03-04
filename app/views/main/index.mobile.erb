@@ -75,7 +75,8 @@
 										<h2 style="color:green">
 										<%= l %> 
 										</h2>
-									<% end %> 
+									<% end %>
+
 							<% end %>
 
 							<% if message.like == nil %>
@@ -85,7 +86,6 @@
 					</div>
 				    <% end %>
 
-					<% end %>
 					<% if Message.pgcount > 1 %>
 						<div align="center"><%= paginate(:short_list) %></div>
 					<% end %>
@@ -145,9 +145,9 @@
 								<% Like.top_ten.each do |like| %>
 										<% m = Message.find(like.message_id) %>
 										<h4><strong><%= m.name %></strong>: <%= m.text %></h4>
-												<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-												</span>
-												<x style="color:RoyalBlue"><%= like.karma %></x>	
+										<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
+										</span>
+										<x style="color:RoyalBlue"><%= like.karma %></x>	
 							    <hr></hr>	
 								<% end %>					
 							<% end %>
