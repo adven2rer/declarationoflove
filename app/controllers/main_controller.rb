@@ -20,6 +20,10 @@ class MainController < ApplicationController
 	   		message_find.like.karma = message_find.like.karma + 1
 	   		message_find.like.save
 	   		cookies[(p)] = "liked"
+	   		if message_find.like.karma > 0
+	   			message_find.like.positive = true
+	   			message_find.like.save
+			end
 	    end
 
 	    if params["dislike_btn"] != nil and cookies[(p)] == nil  
@@ -30,6 +34,10 @@ class MainController < ApplicationController
 	   		if message_find.like.karma <= -10
 	   			message_find.destroy
 	   		end
+	   		if message_find.like.karma < 0
+	   			message_find.like.positive = true
+	   			message_find.like.save
+			end
 	   	end
 
 	    #if params[:page_find] != nil

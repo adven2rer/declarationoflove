@@ -139,19 +139,18 @@
 				        <h4 class="modal-title" id="myModalLabel">ТОП-10 признаний</h4>
 				      </div>
 				      <div class="modal-body" align="center">
-				        		<% if Message.all.empty? %>
-									<h4>Пока ничего нет :(</h4>
-									<% else %>
-										<% Like.top_ten.each do |like| %>
-											<% if like.karma != nil and like.karma > 0 %>
-												<% m = Message.find(like.message_id) %>
-												<h3><strong><%= m.name %></strong>: <%= m.text %></h3>
-														<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-														</span>
-														<x style="color:RoyalBlue"><%= like.karma %></x>
-											<% end %>
-										<% end %>
-								<% end %>
+							<% if Message.all.empty? %>
+								<h4>Пока ничего нет :(</h4>
+							<% else %>
+								<% Like.top_ten.each do |like| %>
+										<% m = Message.find(like.message_id) %>
+										<h4><strong><%= m.name %></strong>: <%= m.text %></h4>
+												<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
+												</span>
+												<x style="color:RoyalBlue"><%= like.karma %></x>	
+							    <hr></hr>	
+								<% end %>					
+							<% end %>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
