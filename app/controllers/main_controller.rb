@@ -41,7 +41,7 @@ class MainController < ApplicationController
 	   		if message_find.like.karma <= -10
 	   			message_find.destroy
 	   		end
-	   		if message_find.like.karma < 0
+	   		if message_find.like.karma <= 0
 	   			message_find.like.positive = false
 	   			message_find.like.save
 			end
