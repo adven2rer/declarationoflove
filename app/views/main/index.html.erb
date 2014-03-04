@@ -166,17 +166,20 @@
 	</div>
 </div>
 
-<div class="row">
-		<div class="col-md-6 col-md-offset-3" align="center">
-			<h4>РАССКАЗАТЬ ДРУЗЬЯМ:</h4>
-			<script type="text/javascript" src="//yandex.st/share/share.js"
-				charset="utf-8">
-			</script>
-			<div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,twitter,gplus" data-yashareTheme="counter">
-	    	</div>
+			<div align="center">
+			<script type="text/javascript">(function() {
+			  if (window.pluso)if (typeof window.pluso.start == "function") return;
+			  if (window.ifpluso==undefined) { window.ifpluso = 1;
+			    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+			    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+			    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+			    var h=d[g]('body')[0];
+			    h.appendChild(s);
+			  }})();</script>
+			<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter,google,bookmark" data-url="http://declarationoflove.herokuapp.com" data-title="онлайн-сервис анонимных любовных признаний"></div>
 	    	<hr></hr>
-	    </div>
-</div>
+		    </div>
+
 
     	<div align="center">
 			<% if @visits_not_unique == 1%>
