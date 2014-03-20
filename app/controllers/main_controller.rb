@@ -87,4 +87,33 @@ class MainController < ApplicationController
 
 	def about
 	end
+
+	def show 
+		if params["like_comment"] != nil
+	    	c = params[:comment_id]
+	    end
+
+   	    @message = Message.find(params[:id])
+
+        if params["comment"]
+			comment = Comment.new
+			comment.text = params[:text]
+			comment.message_id = params[:id]
+			comment.likes = 0
+			comment.save
+    	end
+
+	   	if params["like_comment"] != nil and cookies[(c)] == nil
+	   		comment = Comment.find(c)
+	   		comment.likes = comment.likes + 1
+	   		comment.save
+	   		cookies[(c)] = "liked"
+	    end
+
+    	@comments = @message.comments
+
+    	if cookies[(c)] != nil
+    		@comment_liked = true
+    	end
+  	end
 end

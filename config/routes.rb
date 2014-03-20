@@ -10,6 +10,10 @@ Fresh::Application.routes.draw do
 
   post '/:page' =>  'main#index' 
 
+  get '/confessions/:id' => 'main#show'
+
+  post '/confessions/:id' => 'main#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

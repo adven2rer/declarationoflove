@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
 	  validates :name, presence: true, length: { maximum: 20 }
 	  validates :text, presence: true, length: { maximum: 200}
 	  has_one :like, dependent: :destroy
+	  has_many :comments, dependent: :destroy
 	  
 	  PerPage = 10
 	  def self.page(pg)
