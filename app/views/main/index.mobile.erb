@@ -65,25 +65,26 @@
 		<h2>Пока ничего нет :(</h2>
 	<% end %>
 
-<% @messages.each do |message| %>
+	<% @messages.each do |message| %>
 	<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <div class="row">
-			      <div class="col-xs-4">
-				      <div class="panel-title" align="left">
-				      	<%= image_tag "anonim.png", {height: 60, width: 60} %>
-					  <strong><%= message.name %></strong>:
-				      </div>
+	  <div class="panel-heading">
+	    <div class="row">
+		      <div class="col-xs-6">
+			      <div class="panel-title" align="left">
+			      	<%= image_tag "anonim.png", {height: 60, width: 60} %>
+				  <strong><%= message.name %></strong>:
 			      </div>
-			      <div class="col-xs-4 col-xs-offset-4">
-					  <div align="right">
-					  	<a href="/confessions/<%= message.id %>">#<%= message.id %></a>
-					  </div>
+		      </div>
+		      <div class="col-xs-4 col-xs-offset-2">
+				  <div align="right">
+				  	<a href="/confessions/<%= message.id %>">#<%= message.id %></a>
 				  </div>
-		    </div>
-	      </div>
-	  	<div class="panel-body">
-		  	<%= message.text %>
+			  </div>
+	    </div>
+	  </div>
+
+	  <div class="panel-body">
+	  	<%= message.text %>
 
 		<p></p>
 
@@ -91,53 +92,54 @@
 
 		<%= form_tag do %>
 
-				<%= hidden_field_tag :message_id, message.id %>
+			<%= hidden_field_tag :message_id, message.id %>
+			
+			<%= button_tag(name: "like_btn", type: "submit") do %>
+				<i class="glyphicon glyphicon-thumbs-up" style="font-size:2em;color:#330099"></i> 
+			<% end %>
 
-				<%= button_tag(name: "like_btn", type: "submit") do %>
-					<i class="glyphicon glyphicon-thumbs-up" style="font-size:2em;color:#330099"></i> 
-				<% end %>
-
-				<%= button_tag(name: "dislike_btn", type: "submit") do %>
-					<i class="glyphicon glyphicon-thumbs-down" style="font-size:2em;color:#CC0000"></i>
-				<% end %>
+			<%= button_tag(name: "dislike_btn", type: "submit") do %>
+				<i class="glyphicon glyphicon-thumbs-down" style="font-size:2em;color:#CC0000"></i>
+			<% end %>
 
 		<% end %>
 
 		<% if message.like != nil and message.like.karma != nil %>   
-				<% l = message.like.karma %> 
+			<% l = message.like.karma %> 
 
-				<% if l < 0 %>
-					<h2 style="color:red">
-					<%= l %>
-					</h2>
-				<% elsif l == 0 %>  
-					<h2 style="color:grey">
-					<%= l %>
-					</h2>
-				<% elsif l > 0 %>
-					<h2 style="color:green">
-					<%= l %> 
-					</h2>
-				<% end %> 
+			<% if l < 0 %>
+				<h2 style="color:red">
+				<%= l %>
+				</h2>
+			<% elsif l == 0 %>  
+				<h2 style="color:grey">
+				<%= l %>
+				</h2>
+			<% elsif l > 0 %>
+				<h2 style="color:green">
+				<%= l %> 
+				</h2>
+			<% end %>
+
 		<% end %>
 
 		<% if message.like == nil %>
-			<h2 style="color:grey"> 0 </h2>
+		<h2 style="color:grey"> 0 </h2>
 		<% end %>
 
 		<div class="row">
 
-			<div class="col-xs-4 col-xs-offset-4">
-					<script type="text/javascript">(function() {
-					  if (window.pluso)if (typeof window.pluso.start == "function") return;
-					  if (window.ifpluso==undefined) { window.ifpluso = 1;
-					    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
-					    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
-					    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
-					    var h=d[g]('body')[0];
-					    h.appendChild(s);
-					  }})();</script>
-					<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter" data-title="[Love DM] <%= message.name %>: <%= message.text %>"></div>
+			<div class="col-xs-8">
+				<script type="text/javascript">(function() {
+				  if (window.pluso)if (typeof window.pluso.start == "function") return;
+				  if (window.ifpluso==undefined) { window.ifpluso = 1;
+				    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+				    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+				    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+				    var h=d[g]('body')[0];
+				    h.appendChild(s);
+				  }})();</script>
+				<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" data-description="<%= message.name %>: <%= message.text %>"></div>
 			</div>
 
 			<div class="col-xs-4">
@@ -150,9 +152,8 @@
 
 		</div>
 	</div>
-<% end %>
-
-
+	<% end %>
+	
 </div>
 
 <div class="row-fluid" align="center">
