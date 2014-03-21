@@ -172,19 +172,6 @@
         </div>
       </div>
     </div>
-   
-    <div class="container" align="center">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>" align="center"><%= value %></div>
-      <% end %>
-    </div>
-
-    <div class="container">
-        <%= yield %>
-        <%= debug(params) if Rails.env.development? %>
-    </div>
-
-    </div>
 
   </div>
     <div class="col-sm-4 col-sm-push-1">
@@ -204,38 +191,37 @@
           <% end %>         
         <% end %>
       </div>
-  </div>
+    </div>
+</div>
+
+<div align="center">
+<script type="text/javascript">(function() {
+  if (window.pluso)if (typeof window.pluso.start == "function") return;
+  if (window.ifpluso==undefined) { window.ifpluso = 1;
+    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+    var h=d[g]('body')[0];
+    h.appendChild(s);
+  }})();</script>
+<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,counter,theme=04" data-services="vkontakte,facebook,twitter,google" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" ></div>
 </div>
 
 
-      <div align="center">
-      <script type="text/javascript">(function() {
-        if (window.pluso)if (typeof window.pluso.start == "function") return;
-        if (window.ifpluso==undefined) { window.ifpluso = 1;
-          var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
-          s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
-          s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
-          var h=d[g]('body')[0];
-          h.appendChild(s);
-        }})();</script>
-      <div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,counter,theme=04" data-services="vkontakte,facebook,twitter,google" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" ></div>
-      </div>
+<div align="center">
+<% if @visits_not_unique == 1%>
+  <strong><i><%= @visits_not_unique %></i></strong> посещение за всё время
+<% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
+  <strong><i><%= @visits_not_unique %></i></strong> посещения за всё время
+<% elsif @visits_not_unique >= 5 and @visits_not_unique %>
+  <strong><i><%= @visits_not_unique %></i></strong> посещений за всё время
+<% end %>
 
-
-      <div align="center">
-      <% if @visits_not_unique == 1%>
-        <strong><i><%= @visits_not_unique %></i></strong> посещение за всё время
-      <% elsif @visits_not_unique > 1 and @visits_not_unique < 5 %>
-        <strong><i><%= @visits_not_unique %></i></strong> посещения за всё время
-      <% elsif @visits_not_unique >= 5 and @visits_not_unique %>
-        <strong><i><%= @visits_not_unique %></i></strong> посещений за всё время
-      <% end %>
-
-      <% if @visits_unique == 1 %>
-        <p><strong><i><%= @visits_unique %></i></strong> уникальное посещение за всё время</p>
-      <% elsif @visits_unique > 1 and @visits_unique < 5 %>
-        <p><strong><i><%= @visits_unique %></i></strong> уникальных посещения за всё время</p>
-      <% elsif @visits_unique >= 5 and @visits_unique %>
-        <p><strong><i><%= @visits_unique %></i></strong> уникальных посещений за всё время</p>
-      <% end %>
-    </div>
+<% if @visits_unique == 1 %>
+  <p><strong><i><%= @visits_unique %></i></strong> уникальное посещение за всё время</p>
+<% elsif @visits_unique > 1 and @visits_unique < 5 %>
+  <p><strong><i><%= @visits_unique %></i></strong> уникальных посещения за всё время</p>
+<% elsif @visits_unique >= 5 and @visits_unique %>
+  <p><strong><i><%= @visits_unique %></i></strong> уникальных посещений за всё время</p>
+<% end %>
+</div>
