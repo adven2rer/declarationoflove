@@ -61,26 +61,36 @@
 					</div>
 				</div>
 					
-			<h2>Комментарии</h2>
+			<p>
+				<h2>Оставить комментарий<h2><small>(максимальная длина - 200 символов)</small>						
+			</p>
 
+			<div style="margin-top:2%;margin-bottom:2%">
 			<%= form_tag do %>
 				<%= text_area_tag :text %>
 				<p><%= button_tag(name: "comment", type: "submit", class: "btn btn-default") do %>
 				Отправить
 				<% end %></p>
 			<% end %>
+			</div>
 
-			<% @comments.each do |comment| %>
-				<h3><p><%= comment.text %></p></h3>
-				<%= form_tag do %>
+			<h2>Комментарии:</h2>
 
-					<%= hidden_field_tag :comment_id, comment.id %>
+				<% @comments.each do |comment| %>
+					<h3><p><%= comment.text %></p></h3>
+					<%= form_tag do %>
 
-					<%= button_tag(name: "like_comment", type: "submit") do %>
-							<i class="glyphicon glyphicon-heart" style="font-size:1.5em;color:#CC0000"></i> 
-						<%= comment.likes %>
-					<% end %>
+						<%= hidden_field_tag :comment_id, comment.id %>
 
+						<%= button_tag(name: "like_comment", type: "submit") do %>
+							<% if @comment_liked == true %>
+								<i class="glyphicon glyphicon-heart" style="font-size:1.5em;color:#CC0000"></i> 
+							<% else %>
+								<i class="glyphicon glyphicon-heart" style="font-size:1.5em;color:grey"></i> 	
+							<% end %>					
+							<%= comment.likes %>
+						<% end %>
+			
 				<% end %>
 				<hr></hr>
 			<% end %>

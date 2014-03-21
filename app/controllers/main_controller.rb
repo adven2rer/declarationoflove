@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-	has_mobile_fu 
+	has_mobile_fu(:true)
 	def index
 		if params["submit"] != nil and cookies[:posted] == nil
 				@new_message = Message.new(params[:message].permit(:name, :text))
