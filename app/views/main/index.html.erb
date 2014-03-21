@@ -31,10 +31,6 @@
 					<h2>Пока ничего нет :(</h2>
 				<% end %>
 
-					<% if @saved == false %>
-					<button style="margin-bottom:2%; margin-top:2%" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Вы не можете публиковать сообщения чаще, чем 1 раз в минуту.">Ошибка!</button>
-					<% end %>
-
 						<% @messages.each do |message| %>
 							<div class="panel panel-default">
 							  <div class="panel-heading">
