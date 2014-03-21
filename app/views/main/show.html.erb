@@ -1,5 +1,5 @@
 <div class="row" style="margin-top:2%">
-	<div class="col-md-6 col-md-offset-3"
+	<div class="col-md-6 col-md-offset-3">
 		<div align="center">
 				<div class="panel panel-default">
 					  <div class="panel-heading">
@@ -20,11 +20,11 @@
 							<%= hidden_field_tag :@message_id, @message.id %>
 
 							<%= button_tag(name: "like_btn", type: "submit") do %>
-								<i class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em;color:MediumBlue"></i> 
+								<i class="glyphicon glyphicon-thumbs-up" style="font-size:2em;color:#330099"></i> 
 							<% end %>
 
 							<%= button_tag(name: "dislike_btn", type: "submit") do %>
-								<i class="glyphicon glyphicon-thumbs-down" style="font-size:1.5em;color:Crimson"></i>
+								<i class="glyphicon glyphicon-thumbs-down" style="font-size:2em;color:#CC0000"></i>
 							<% end %>
 
 					<% end %>
@@ -57,11 +57,11 @@
 						    var h=d[g]('body')[0];
 						    h.appendChild(s);
 						  }})();</script>
-						<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter,google,bookmark" data-url="http://lovedm.ru/confessions/<%= @message.id %>" data-title="<%= @message.name %>: <% @message.text %>"></div>
-					    </div>
+						<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,counter,theme=04" data-services="vkontakte,facebook,twitter,google" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" data-description="<%= @message.name %>: <%= @message.text%>"></div>
+					</div>
 				</div>
-		</div>
-					
+				</div>
+
 			<h2>Комментарии</h2>
 
 			<%= form_tag do %>
@@ -78,11 +78,16 @@
 					<%= hidden_field_tag :comment_id, comment.id %>
 
 					<%= button_tag(name: "like_comment", type: "submit") do %>
+						<% if @comment_liked == true %>
 							<i class="glyphicon glyphicon-heart" style="font-size:1.5em;color:#CC0000"></i> 
+						<% else %>
+							<i class="glyphicon glyphicon-heart" style="font-size:1.5em;color:grey"></i> 	
+						<% end %>					
 						<%= comment.likes %>
 					<% end %>
-
+		
 				<% end %>
+				<hr></hr>
 			<% end %>
 
 			<p style="margin-top:2%"><%= link_to 'Ко всем признаниям', root_path %></p>

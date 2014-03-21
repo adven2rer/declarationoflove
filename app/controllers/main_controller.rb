@@ -95,6 +95,17 @@ class MainController < ApplicationController
 
    	    @message = Message.find(params[:id])
 
+	   	if params["like_btn"] != nil and cookies[@message.id] == nil
+	   		message_find = Message.find(@message.id)
+	   		message_find.like.karma = message_find.like.karma + 1
+	   		message_find.like.save
+	   		cookies[@message.id] = "liked"
+	   		if message_find.like.karma > 0
+	   			message_find.like.positive = true
+	   			message_find.like.save
+			end
+	    end
+
         if params["comment"]
 			comment = Comment.new
 			comment.text = params[:text]
@@ -107,13 +118,15 @@ class MainController < ApplicationController
 	   		comment = Comment.find(c)
 	   		comment.likes = comment.likes + 1
 	   		comment.save
-	   		cookies[(c)] = "liked"
+	   		cookies[(c)] = "comment_liked"
 	    end
 
     	@comments = @message.comments
 
-    	if cookies[(c)] != nil
-    		@comment_liked = true
-    	end
+    	@message.comments.all.each do |comment|
+	    	if cookies[comment.id] != nil
+	    		@comment_liked = true
+	    	end
+	    end	
   	end
 end
