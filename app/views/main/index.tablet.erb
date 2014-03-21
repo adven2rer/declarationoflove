@@ -127,20 +127,6 @@
               </div>
             </div>
               <% end %>
-
-            <div class="col-xs-8 col-xs-offset-2">
-              <div align="center">
-                <% if Message.pgcount > 6 %>
-                  <h5>Перейти на страницу...</h5>
-                  <%= form_tag do %> 
-                    <%= text_field_tag :page %>
-                    <%= button_tag(type: 'page_find', class: "btn btn-default") do %>
-                      ОК
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
             
             <div class="col-xs-8 col-xs-offset-2">
               <div align="center">
