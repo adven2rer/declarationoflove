@@ -26,134 +26,140 @@
 		<% end %>
 	</div>
 
-<!-- Button trigger modal -->
-<div align="center" style="margin-bottom:2%; margin-top:2%">
-	<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
- 	 ТОП-10 признаний
-	</button>
-</div>
+<div align="center">
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="padding-top:10%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">ТОП-10 признаний</h4>
-      </div>
-      <div class="modal-body" align="center">
-			<% if Message.all.empty? %>
-				<h4>Пока ничего нет :(</h4>
-			<% else %>
-				<% Like.top_ten.each do |like| %>
-						<% m = Message.find(like.message_id) %>
-						<h4><strong><%= m.name %></strong>: <%= m.text %></h4>
-						<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-						</span>
-						<x style="color:RoyalBlue"><%= like.karma %></x>	
-			    <hr></hr>	
-				<% end %>					
-			<% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<!-- Button trigger modal -->
+	<div align="center" style="margin-bottom:2%; margin-top:2%">
+		<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+	 	 ТОП-10 признаний
+		</button>
+	</div>
 
-<% if Message.all.empty? %>
-	<h2>Пока ничего нет :(</h2>
-<% end %>
-
-<% @messages.each do |message| %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <div class="row">
-	      <div class="col-xs-6">
-		      <div class="panel-title" align="left">
-		      	<%= image_tag "anonim.png", {height: 60, width: 60} %>
-			  <strong><%= message.name %></strong>:
-		      </div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="padding-top:10%">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">ТОП-10 признаний</h4>
 	      </div>
-	      <div class="col-xs-4 col-xs-offset-2">
-			  <div align="right">
-			  	<a href="/confessions/<%= message.id %>">#<%= message.id %></a>
+	      <div class="modal-body" align="center">
+				<% if Message.all.empty? %>
+					<h4>Пока ничего нет :(</h4>
+				<% else %>
+					<% Like.top_ten.each do |like| %>
+							<% m = Message.find(like.message_id) %>
+							<h4><strong><%= m.name %></strong>: <%= m.text %></h4>
+							<span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
+							</span>
+							<x style="color:RoyalBlue"><%= like.karma %></x>	
+				    <hr></hr>	
+					<% end %>					
+				<% end %>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<% if Message.all.empty? %>
+		<h2>Пока ничего нет :(</h2>
+	<% end %>
+
+	<% @messages.each do |message| %>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <div class="row">
+		      <div class="col-xs-6">
+			      <div class="panel-title" align="left">
+			      	<%= image_tag "anonim.png", {height: 60, width: 60} %>
+				  <strong><%= message.name %></strong>:
+			      </div>
+		      </div>
+		      <div class="col-xs-4 col-xs-offset-2">
+				  <div align="right">
+				  	<a href="/confessions/<%= message.id %>">#<%= message.id %></a>
+				  </div>
 			  </div>
-		  </div>
-    </div>
-  </div>
+	    </div>
+	  </div>
 
-  <div class="panel-body">
-  	<%= message.text %>
+	  <div class="panel-body">
+	  	<%= message.text %>
 
-	<p></p>
+		<p></p>
 
-	<h6 style="color:grey"><%= time_ago_in_words(message.created_at) %> ago</h6>
+		<h6 style="color:grey"><%= time_ago_in_words(message.created_at) %> ago</h6>
 
-	<%= form_tag do %>
+		<%= form_tag do %>
 
-		<%= hidden_field_tag :message_id, message.id %>
-		
-		<%= button_tag(name: "like_btn", type: "submit") do %>
-			<i class="glyphicon glyphicon-thumbs-up" style="font-size:2em;color:#330099"></i> 
+			<%= hidden_field_tag :message_id, message.id %>
+			
+			<%= button_tag(name: "like_btn", type: "submit") do %>
+				<i class="glyphicon glyphicon-thumbs-up" style="font-size:2em;color:#330099"></i> 
+			<% end %>
+
+			<%= button_tag(name: "dislike_btn", type: "submit") do %>
+				<i class="glyphicon glyphicon-thumbs-down" style="font-size:2em;color:#CC0000"></i>
+			<% end %>
+
 		<% end %>
 
-		<%= button_tag(name: "dislike_btn", type: "submit") do %>
-			<i class="glyphicon glyphicon-thumbs-down" style="font-size:2em;color:#CC0000"></i>
+		<% if message.like != nil and message.like.karma != nil %>   
+			<% l = message.like.karma %> 
+
+			<% if l < 0 %>
+				<h2 style="color:red">
+				<%= l %>
+				</h2>
+			<% elsif l == 0 %>  
+				<h2 style="color:grey">
+				<%= l %>
+				</h2>
+			<% elsif l > 0 %>
+				<h2 style="color:green">
+				<%= l %> 
+				</h2>
+			<% end %>
+
 		<% end %>
 
-	<% end %>
-
-	<% if message.like != nil and message.like.karma != nil %>   
-		<% l = message.like.karma %> 
-
-		<% if l < 0 %>
-			<h2 style="color:red">
-			<%= l %>
-			</h2>
-		<% elsif l == 0 %>  
-			<h2 style="color:grey">
-			<%= l %>
-			</h2>
-		<% elsif l > 0 %>
-			<h2 style="color:green">
-			<%= l %> 
-			</h2>
+		<% if message.like == nil %>
+		<h2 style="color:grey"> 0 </h2>
 		<% end %>
 
-	<% end %>
+		<div class="row">
 
-	<% if message.like == nil %>
-	<h2 style="color:grey"> 0 </h2>
-	<% end %>
+			<div class="col-xs-8">
+				<script type="text/javascript">(function() {
+				  if (window.pluso)if (typeof window.pluso.start == "function") return;
+				  if (window.ifpluso==undefined) { window.ifpluso = 1;
+				    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+				    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+				    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+				    var h=d[g]('body')[0];
+				    h.appendChild(s);
+				  }})();</script>
+				<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter,google" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" data-description="<%= message.name %>: <%= message.text %>"></div>
+			</div>
 
-	<div class="row">
+			<div class="col-xs-4">
+			
+				<div align="right">
+					<a href="/confessions/<%= message.id %>">Комментарии (<%= message.comments.count %>)</a>
+				</div>
 
-		<div class="col-xs-8">
-			<script type="text/javascript">(function() {
-			  if (window.pluso)if (typeof window.pluso.start == "function") return;
-			  if (window.ifpluso==undefined) { window.ifpluso = 1;
-			    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
-			    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
-			    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
-			    var h=d[g]('body')[0];
-			    h.appendChild(s);
-			  }})();</script>
-			<div class="pluso" data-background="transparent" data-options="big,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter,google" data-title="Love DM - Нюрбинский онлайн-сервис анонимных признаний в любви" data-description="<%= message.name %>: <%= message.text %>"></div>
-		</div>
-
-		<div class="col-xs-4">
-		
-			<div align="right">
-				<a href="/confessions/<%= message.id %>">Комментарии (<%= message.comments.count %>)</a>
 			</div>
 
 		</div>
-
 	</div>
+	<% end %>
 </div>
-<% end %>
+</div>
+</div>
+</div>
 
 <div class="container" align="center">
 	<% flash.each do |key, value| %>
