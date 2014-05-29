@@ -161,23 +161,29 @@
 
   </div>
     <div class="col-sm-4 col-sm-push-1">
-      <div align="center">
-        <%= image_tag "top10.jpg" %>
-        <legend><h2>признаний</h2></legend>
-        <% if Message.all.empty? %>
-          <h4>Пока ничего нет :(</h4>
-        <% else %>
-          <% Like.top_ten.each do |like| %>
-              <% m = Message.find(like.message_id) %>
-              <h4><strong><%= m.name %></strong>: <%= m.text %></h4>
-              <span class="glyphicon glyphicon-thumbs-up" style="font-size:2.3em;color:RoyalBlue">
-              </span>
-              <x style="color:RoyalBlue"><%= like.karma %></x>  
-            <hr></hr> 
-          <% end %>         
-        <% end %>
-      </div>
+    <div align="center">
+      <%= image_tag "top10.jpg" %>
+      <legend><h2>признаний <span class="glyphicon glyphicon-fire"></span></h2></legend>
+      <% if Message.all.empty? %>
+        <h4>Пока ничего нет :(</h4>
+      <% else %>
+        <% Like.top_ten.each do |like| %>
+            <% m = Message.find(like.message_id) %>
+            </a><h4><strong><%= m.name %></strong>: <%= m.text %></h4>
+            <%= form_tag do %>
+                  <%= hidden_field_tag :message_id, m.id %>
+                  <%= button_tag(name: "like_btn", type: "submit") do %>
+                    Оценили
+                    <i class="glyphicon glyphicon-thumbs-up" style="font-size:1em;color:RoyalBlue"><x style="color:RoyalBlue;font-size:1.2em"><%= like.karma %></x></i> 
+                  <% end %>
+                      </button> 
+                      <a href="/confessions/<%= m.id %>"><span class="glyphicon glyphicon-eye-open" style="font-size:1.5em"></a>
+            <% end %>
+          <hr></hr> 
+        <% end %>         
+      <% end %>
     </div>
+  </div>
 </div>
 
 <div align="center">
