@@ -88,9 +88,20 @@ class MainController < ApplicationController
 	def about
 	end
 
-	def show 
+	def show
+		#page = params_page[:page]
+		#n = 1
+ 
 		if params["like_comment"] != nil
 	    	c = params[:comment_id]
+	    	#cookies[(c)] = "liked"
+	    	#comments = Message.find(page).comments
+	    	#comments.each do |comment|
+	    	#	if cookies[comment.id] != nil and comment.id = cookies[comment.id] 
+	    	#		@comment_liked*n = true
+	    	#		n = n + 1
+	    	#	end
+	    	#end
 	    end
 
    	    @message = Message.find(params[:id])
